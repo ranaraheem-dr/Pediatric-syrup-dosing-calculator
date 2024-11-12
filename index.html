@@ -5,25 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pediatric Dosing Calculator</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
 </head>
 <body>
     <header>
-        <h1>Pediatric Dosing Calculator by Dr Rana Raheem</h1>
-        <p>Calculate doses automatically for each medication based on weight.</p>
+        <h1>Pediatric Dosing Calculator</h1>
+        <p>Automated pediatric dosing calculator by Dr. Rana Raheem for clinical use</p>
     </header>
 
     <main>
-        <div class="container">
+        <!-- Input Section for Weight and Medication Selection -->
+        <section class="input-section">
             <label for="weight">Patient Weight (kg):</label>
-            <input type="number" id="weight" placeholder="Enter weight in kg" step="0.1">
+            <input type="number" id="weight" placeholder="Enter weight in kg" step="0.1" required>
 
-            <button onclick="calculateAllDoses()">Calculate Doses</button>
+            <label for="frequency">Frequency (doses per day):</label>
+            <input type="number" id="frequency" placeholder="Enter frequency" step="1" required>
 
-            <section id="results" class="results">
-                <h2>Dosage Results</h2>
-                <div id="doseResults"></div>
-            </section>
-        </div>
+            <label for="search">Search Medication or Illness:</label>
+            <input type="text" id="search" placeholder="Type to search..." oninput="searchMedications()">
+
+            <label for="medication">Select Medication:</label>
+            <select id="medication" onchange="populateMedicationDetails()">
+                <option value="">-- Select Medication --</option>
+            </select>
+        </section>
+
+        <!-- Section to Display Selected Medication Details -->
+        <section class="medication-details" id="medicationDetails">
+            <h2>Medication Details</h2>
+            <label for="concentration">Select Concentration:</label>
+            <select id="concentration"></select>
+            <p id="dosageInstructions"></p>
+        </section>
+
+        <!-- Section to Display Calculated Dose -->
+        <section class="result-section" id="result">
+            <h2>Calculated Dose</h2>
+            <div id="doseDetails"></div>
+            <button onclick="calculateDose()">Calculate Dose</button>
+        </section>
     </main>
 
     <script src="app.js"></script>
